@@ -1,0 +1,247 @@
+﻿:root {
+    --bg: #f5f8ff;
+    --surface: #ffffff;
+    --surface-soft: #fbfcff;
+    --text: #1e2a3d;
+    --muted: #5f6e86;
+    --border: #e3e8f3;
+    --accent: #2f80ed;
+    --glow: rgba(0, 15, 24, 0.42);
+    --card-1: #cad0ff;
+    --card-2: #e3e3e3;
+    --shadow: 0 20px 40px rgba(24, 39, 65, 0.12);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+a {
+    color: #1f5fbf;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(31, 95, 191, 0.35);
+    transition: color 0.18s ease, border-bottom-color 0.18s ease;
+}
+
+a:visited {
+    color: #4d56aa;
+    border-bottom-color: rgba(77, 86, 170, 0.35);
+}
+
+a:hover,
+a:focus-visible {
+    color: #17478f;
+    border-bottom-color: currentColor;
+}
+
+a:focus-visible {
+    outline: 2px solid rgba(23, 71, 143, 0.22);
+    outline-offset: 2px;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", "Arial", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 0% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 45%),
+        linear-gradient(150deg, #ffffff 0%, var(--bg) 100%);
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.container {
+    width: min(1120px, 92vw);
+    margin: 0 auto;
+    padding: 48px 0 64px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+    line-height: 1.22;
+}
+
+.page-header p {
+    margin: 10px 0 0;
+    color: var(--muted);
+}
+
+.dictionary-groups {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.letter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.letter-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.letter-divider h2 {
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+}
+
+.letter-divider span {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.letter-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #d7deed 0%, #eef2fa 100%);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 18px;
+}
+
+.word-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 18px;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.word-card:hover,
+.word-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: #c8b4d9;
+    box-shadow:
+        0 0 0 4px var(--glow),
+        0 10px 24px rgba(28, 48, 82, 0.16);
+}
+
+.word-main h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.25;
+    color: #1e2940;
+}
+
+.meaning {
+    margin: 10px 0 0;
+    color: #2b3750;
+    line-height: 1.45;
+}
+
+.card-hint {
+    margin: 12px 0 0;
+    font-size: 0.86rem;
+    color: #244f8d;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(15, 28, 52, 0.52);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    position: relative;
+    width: min(900px, 100%);
+    max-height: min(88vh, 920px);
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    padding: 20px 28px 28px;
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.2s ease;
+}
+
+.modal-backdrop.visible .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: none;
+    background: #eef3ff;
+    color: #24395d;
+    border-radius: 999px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    margin: 0;
+    display: inline-grid;
+    place-items: center;
+}
+
+.modal-word {
+    margin: 0 0 14px;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    line-height: 1.15;
+    color: #1e2940;
+}
+
+.modal-meaning,
+.modal-example {
+    margin: 0;
+    line-height: 1.6;
+    font-size: clamp(1.05rem, 2.3vw, 1.3rem);
+    color: #2b3750;
+}
+
+.modal-meaning {
+    margin-bottom: 10px;
+}
+
+.empty {
+    margin-top: 16px;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px dashed #d6dce8;
+    background: #ffffff;
+    color: #4d5668;
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding-top: 28px;
+    }
+
+    .modal-card {
+        padding: 22px;
+        border-radius: 18px;
+    }
+}
